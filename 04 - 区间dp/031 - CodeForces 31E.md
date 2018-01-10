@@ -36,7 +36,7 @@ int main()
 	{
 		scanf("%s", s);
 
-		memset(dp, -1, sizeof(dp));
+		memset(dp, -1, sizeof(dp)); // 因为前导 0 的可能，需要赋值为 -1，不能为 0
 		memset(c, 0, sizeof(c));
 		memset(p, 0, sizeof(p));
 
