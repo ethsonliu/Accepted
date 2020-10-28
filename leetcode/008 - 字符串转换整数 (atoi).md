@@ -29,27 +29,26 @@ public:
             }
         }
 
-        int ret = 0;
+        double ret = 0;
         double limit = (double)INT_MAX + 1;
         int cnt = -1;
         for (; idx < len; ++idx) {
             cnt++;
             if (s[idx] >= '0' && s[idx] <= '9') {
-                double tmp = ret * pow(10, cnt) + (s[idx] - '0');
-                if (tmp > limit || (tmp == limit && sign == 1)) { // 溢出
+                ret = ret * pow(10, cnt) + (s[idx] - '0');
+                if (ret > limit || (ret == limit && sign == 1)) { // 溢出
                     if (sign == 1) {
                         return INT_MAX;
                     } else {
                         return INT_MIN;
                     }
                 }
-                ret = tmp;
             } else {
                 break;
             }
         }
 
-        return sign * ret;
+        return sign * (int)ret;
     }
 };
 ```
