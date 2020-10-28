@@ -12,18 +12,18 @@ public:
         int idx = 0;
         int sign = 1;
         for (; idx < len; ++idx) {
-            if (s[idx] == ' ' || s[idx] == '0')
+            if (s[idx] == ' ')
                 continue;
-            else if (s[idx] > '0' && s[idx] <= '9')
+            else if (s[idx] >= '0' && s[idx] <= '9')
                 break;
             else if (s[idx] == '-') {
                 sign = -1;
                 idx++;
-                continue;
+                break;
             } else if (s[idx] == '+') {
                 sign = 1;
                 idx++;
-                continue;
+                break;
             } else {
                 return 0;
             }
@@ -31,11 +31,9 @@ public:
 
         double ret = 0;
         double limit = (double)INT_MAX + 1;
-        int cnt = -1;
         for (; idx < len; ++idx) {
-            cnt++;
             if (s[idx] >= '0' && s[idx] <= '9') {
-                ret = ret * pow(10, cnt) + (s[idx] - '0');
+                ret = ret * 10 + (s[idx] - '0');
                 if (ret > limit || (ret == limit && sign == 1)) { // 溢出
                     if (sign == 1) {
                         return INT_MAX;
@@ -48,8 +46,12 @@ public:
             }
         }
 
-        return sign * (int)ret;
+        if (sign == -1)
+            return -1 * ret;
+            
+        return ret;
     }
 };
 ```
 
+执行用时：8 ms；内存消耗：7.1 MB
